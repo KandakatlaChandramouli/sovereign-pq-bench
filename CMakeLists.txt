@@ -35,6 +35,8 @@ set(SOURCES
     src/metrics/csv_exporter.cpp
     src/metrics/json_exporter.cpp
     src/metrics/markdown_exporter.cpp
+    src/metrics/statistical_analysis.cpp
+    src/metrics/energy_meter.cpp
     src/utils/random_generator.cpp
     src/utils/timer.cpp
 )
