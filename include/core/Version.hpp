@@ -1,0 +1,7 @@
+#pragma once
+
+#define SPQB_VERSION_MAJOR 0
+#define SPQB_VERSION_MINOR 1
+#define SPQB_VERSION_PATCH 0
+
+#define SPQB_VERSION_STRING "0.1.0"
