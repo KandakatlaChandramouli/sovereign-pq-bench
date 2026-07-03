@@ -17,17 +17,23 @@ enum class Algorithm {
     ED25519,
     ML_DSA_44,
     ML_DSA_65,
-    ML_DSA_87
+    ML_DSA_87,
+    FALCON_512,
+    FALCON_1024,
+    SPHINCS_128S,
+    SPHINCS_128F,
+    SPHINCS_192S,
+    SPHINCS_192F,
+    SPHINCS_256S,
+    SPHINCS_256F
 };
 
 struct KeyPair {
     std::vector<std::byte> public_key;
     std::vector<std::byte> private_key;
-
     KeyPair() = default;
     KeyPair(std::vector<std::byte> pub, std::vector<std::byte> priv)
         : public_key(std::move(pub)), private_key(std::move(priv)) {}
-
     [[nodiscard]] bool is_valid() const noexcept {
         return !public_key.empty() && !private_key.empty();
     }
@@ -36,14 +42,10 @@ struct KeyPair {
 struct Signature {
     std::vector<std::byte> data;
     Algorithm algorithm;
-
     Signature() = default;
     Signature(std::vector<std::byte> sig, Algorithm algo)
         : data(std::move(sig)), algorithm(algo) {}
-
-    [[nodiscard]] bool is_valid() const noexcept {
-        return !data.empty();
-    }
+    [[nodiscard]] bool is_valid() const noexcept { return !data.empty(); }
 };
 
 enum class ErrorCode {
@@ -69,7 +71,6 @@ class SignatureScheme {
 public:
     explicit SignatureScheme(Algorithm algo);
     virtual ~SignatureScheme();
-
     SignatureScheme(const SignatureScheme&) = delete;
     SignatureScheme& operator=(const SignatureScheme&) = delete;
     SignatureScheme(SignatureScheme&&) noexcept;
@@ -82,26 +83,8 @@ public:
     [[nodiscard]] virtual std::size_t signature_size() const noexcept = 0;
 
     [[nodiscard]] virtual CryptoResult<KeyPair> generate_keypair() = 0;
-
-    [[nodiscard]] virtual CryptoResult<Signature>
-    sign(std::span<const std::byte> message, std::span<const std::byte> private_key) = 0;
-
-    [[nodiscard]] virtual CryptoResult<bool>
-    verify(std::span<const std::byte> message,
-           std::span<const std::byte> signature,
-           std::span<const std::byte> public_key) = 0;
-
-    [[nodiscard]] virtual CryptoResult<std::vector<std::byte>>
-    export_public_key_pem(std::span<const std::byte> public_key) = 0;
-
-    [[nodiscard]] virtual CryptoResult<std::vector<std::byte>>
-    export_private_key_pem(std::span<const std::byte> private_key) = 0;
-
-    [[nodiscard]] virtual CryptoResult<std::vector<std::byte>>
-    import_public_key_pem(std::span<const std::byte> pem_data) = 0;
-
-    [[nodiscard]] virtual CryptoResult<std::vector<std::byte>>
-    import_private_key_pem(std::span<const std::byte> pem_data) = 0;
+    [[nodiscard]] virtual CryptoResult<Signature> sign(std::span<const std::byte> message, std::span<const std::byte> private_key) = 0;
+    [[nodiscard]] virtual CryptoResult<bool> verify(std::span<const std::byte> message, std::span<const std::byte> signature, std::span<const std::byte> public_key) = 0;
 
 protected:
     Algorithm algo_;

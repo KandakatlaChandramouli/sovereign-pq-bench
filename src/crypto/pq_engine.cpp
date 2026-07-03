@@ -1,22 +1,22 @@
-#include "sovereign/crypto/ml_dsa_engine.hpp"
+#include "sovereign/crypto/pq_engine.hpp"
 #include <cstring>
 #include <stdexcept>
 
 namespace sovereign {
 
-MlDsaEngine::MlDsaEngine(const char* oqs_alg, Algorithm algo, const char* display_name)
+PqSignatureEngine::PqSignatureEngine(const char* oqs_alg, Algorithm algo, const char* display_name)
     : SignatureScheme(algo), sig_(nullptr), display_name_(display_name) {
     sig_ = OQS_SIG_new(oqs_alg);
     if (!sig_) throw std::runtime_error(std::string("Failed to initialize ") + display_name);
 }
-MlDsaEngine::~MlDsaEngine() { if (sig_) OQS_SIG_free(sig_); }
+PqSignatureEngine::~PqSignatureEngine() { if (sig_) OQS_SIG_free(sig_); }
 
-std::string_view MlDsaEngine::name() const noexcept { return display_name_; }
-std::size_t MlDsaEngine::public_key_size() const noexcept { return sig_ ? sig_->length_public_key : 0; }
-std::size_t MlDsaEngine::private_key_size() const noexcept { return sig_ ? sig_->length_secret_key : 0; }
-std::size_t MlDsaEngine::signature_size() const noexcept { return sig_ ? sig_->length_signature : 0; }
+std::string_view PqSignatureEngine::name() const noexcept { return display_name_; }
+std::size_t PqSignatureEngine::public_key_size() const noexcept { return sig_ ? sig_->length_public_key : 0; }
+std::size_t PqSignatureEngine::private_key_size() const noexcept { return sig_ ? sig_->length_secret_key : 0; }
+std::size_t PqSignatureEngine::signature_size() const noexcept { return sig_ ? sig_->length_signature : 0; }
 
-CryptoResult<KeyPair> MlDsaEngine::generate_keypair() {
+CryptoResult<KeyPair> PqSignatureEngine::generate_keypair() {
     if (!sig_) return {std::nullopt, make_error_code(ErrorCode::INTERNAL_ERROR)};
     std::vector<std::byte> pub(public_key_size()), priv(private_key_size());
     if (OQS_SIG_keypair(sig_, reinterpret_cast<uint8_t*>(pub.data()), reinterpret_cast<uint8_t*>(priv.data())) != OQS_SUCCESS)
@@ -24,7 +24,7 @@ CryptoResult<KeyPair> MlDsaEngine::generate_keypair() {
     return {KeyPair(std::move(pub), std::move(priv)), std::error_code{}};
 }
 
-CryptoResult<Signature> MlDsaEngine::sign(std::span<const std::byte> message, std::span<const std::byte> private_key) {
+CryptoResult<Signature> PqSignatureEngine::sign(std::span<const std::byte> message, std::span<const std::byte> private_key) {
     if (!sig_) return {std::nullopt, make_error_code(ErrorCode::INTERNAL_ERROR)};
     std::vector<std::byte> sig(signature_size());
     std::size_t sig_len = sig.size();
@@ -36,7 +36,7 @@ CryptoResult<Signature> MlDsaEngine::sign(std::span<const std::byte> message, st
     return {Signature(std::move(sig), algo_), std::error_code{}};
 }
 
-CryptoResult<bool> MlDsaEngine::verify(std::span<const std::byte> message, std::span<const std::byte> signature, std::span<const std::byte> public_key) {
+CryptoResult<bool> PqSignatureEngine::verify(std::span<const std::byte> message, std::span<const std::byte> signature, std::span<const std::byte> public_key) {
     if (!sig_) return {std::nullopt, make_error_code(ErrorCode::INTERNAL_ERROR)};
     OQS_STATUS status = OQS_SIG_verify(sig_,
         reinterpret_cast<const uint8_t*>(message.data()), message.size(),
