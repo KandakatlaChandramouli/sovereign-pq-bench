@@ -52,10 +52,7 @@ struct StatisticalResult {
 class StatisticalAnalyzer {
 public:
     StatisticalAnalyzer() = default;
-    
     [[nodiscard]] StatisticalResult analyze(std::vector<double> latencies_ns, uint64_t bytes_per_op = 0);
-    
-private:
     [[nodiscard]] static double percentile(const std::vector<double>& sorted, double pct);
     [[nodiscard]] static ConfidenceInterval bootstrap_ci(const std::vector<double>& data, double confidence, int bootstrap_samples = 10000);
     [[nodiscard]] static double compute_skewness(const std::vector<double>& data, double mean, double stddev);

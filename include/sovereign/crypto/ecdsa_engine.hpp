@@ -5,11 +5,6 @@
 
 namespace sovereign {
 
-struct EvpKeyDeleter {
-    void operator()(EVP_PKEY* key) const noexcept { if (key) EVP_PKEY_free(key); }
-};
-using EvpKeyPtr = std::unique_ptr<EVP_PKEY, EvpKeyDeleter>;
-
 class EcdsaEngine final : public SignatureScheme {
 public:
     explicit EcdsaEngine();
@@ -20,7 +15,7 @@ public:
     EcdsaEngine& operator=(EcdsaEngine&&) noexcept = default;
 
     [[nodiscard]] std::string_view name() const noexcept override { return "ECDSA-P256"; }
-    [[nodiscard]] std::size_t public_key_size() const noexcept override { return 91; }
+    [[nodiscard]] std::size_t public_key_size() const noexcept override { return 65; }
     [[nodiscard]] std::size_t private_key_size() const noexcept override { return 32; }
     [[nodiscard]] std::size_t signature_size() const noexcept override { return 72; }
 

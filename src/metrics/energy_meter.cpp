@@ -4,9 +4,9 @@
 #include <iostream>
 
 #ifdef __linux__
-#include <sys/syscall.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/types.h>
 #endif
 
 namespace sovereign {
@@ -16,8 +16,7 @@ EnergyMeter::EnergyMeter() {
     available_ = !source_.empty();
     
 #ifdef __linux__
-    if (source_ == "RAPL" || source_ == "perf") {
-        // Try to open RAPL energy counter
+    if (available_) {
         fd_ = open("/sys/class/powercap/intel-rapl:0/energy_uj", O_RDONLY);
         if (fd_ < 0) {
             fd_ = open("/sys/class/powercap/intel-rapl:0:0/energy_uj", O_RDONLY);
@@ -49,7 +48,7 @@ EnergyReading EnergyMeter::stop() {
     auto end_time = std::chrono::high_resolution_clock::now().time_since_epoch().count();
     
     reading.elapsed_sec = static_cast<double>(end_time - start_time_ns_) / 1e9;
-    reading.joules = (end_energy - start_energy_) / 1e6;  // uJ to J
+    reading.joules = (end_energy - start_energy_) / 1e6;
     reading.avg_watts = reading.elapsed_sec > 0 ? reading.joules / reading.elapsed_sec : 0.0;
     reading.source = source_;
     
@@ -71,22 +70,9 @@ double EnergyMeter::read_rapl_energy() {
     return 0.0;
 }
 
-double EnergyMeter::read_perf_energy() { return 0.0; }
-uint64_t EnergyMeter::read_tsc() {
-#ifdef __linux__
-    unsigned int lo, hi;
-    __asm__ __volatile__("rdtsc" : "=a"(lo), "=d"(hi));
-    return (static_cast<uint64_t>(hi) << 32) | lo;
-#endif
-    return 0;
-}
-
 std::string EnergyMeter::detect_available_source() {
 #ifdef __linux__
     std::ifstream f("/sys/class/powercap/intel-rapl:0/energy_uj");
-    if (f.good()) return "RAPL";
-    f.close();
-    f.open("/sys/class/powercap/intel-rapl:0:0/energy_uj");
     if (f.good()) return "RAPL";
 #endif
     return "";
