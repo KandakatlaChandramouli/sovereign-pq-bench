@@ -1,149 +1,116 @@
 #include "sovereign/metrics/metrics_collector.hpp"
 #include "sovereign/utils/random_generator.hpp"
 #include "sovereign/utils/timer.hpp"
+#include "sovereign/metrics/system_info.hpp"
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <iomanip>
 
 namespace sovereign {
 
 MetricsCollector::MetricsCollector() = default;
 MetricsCollector::~MetricsCollector() = default;
 
-void MetricsCollector::set_iterations(uint64_t warmup, uint64_t measured) {
-    warmup_iterations_ = warmup;
-    measured_iterations_ = measured;
+void MetricsCollector::set_config(const BenchmarkConfig& config) { config_ = config; }
+
+PerfCounters MetricsCollector::read_perf_counters() {
+    PerfCounters pc;
+    return pc;
 }
 
-AlgorithmBenchmarkResult MetricsCollector::run_algorithm_benchmark(SignatureScheme& scheme) {
-    AlgorithmBenchmarkResult result;
-    result.algorithm = scheme.algorithm();
+ComprehensiveResult MetricsCollector::run_comprehensive_benchmark(SignatureScheme& scheme) {
+    ComprehensiveResult result;
     result.algorithm_name = std::string(scheme.name());
-
-    collect_keygen_metrics(scheme, result.keygen);
-
-    auto keypair_result = scheme.generate_keypair();
-    if (!keypair_result.first) {
-        std::cerr << "Key generation failed for " << scheme.name() << "\n";
-        return result;
-    }
-
-    auto& keypair = *keypair_result.first;
-    result.public_key_bytes = keypair.public_key.size();
-    result.private_key_bytes = keypair.private_key.size();
-
+    result.algorithm = scheme.algorithm();
+    
+    auto sys = SystemInfo::collect();
+    result.cpu_model = sys.cpu_model;
+    result.os_info = sys.os_name;
+    result.compiler_version = sys.compiler_name + " " + sys.compiler_version;
+    result.timestamp = sys.timestamp;
+    
     RandomGenerator rng;
-    std::vector<std::byte> msg_1b(1);
-    std::vector<std::byte> msg_1kb(1024);
-    std::vector<std::byte> msg_1mb(1024 * 1024);
-    rng.fill_buffer(msg_1b);
-    rng.fill_buffer(msg_1kb);
-    rng.fill_buffer(msg_1mb);
-
-    auto sig_1b_result = scheme.sign(msg_1b, keypair.private_key);
-    if (sig_1b_result.first) {
-        result.signature_bytes = sig_1b_result.first->data.size();
+    
+    // Keygen benchmark
+    std::vector<double> keygen_latencies;
+    keygen_latencies.reserve(config_.measured_iterations);
+    for (uint64_t i = 0; i < config_.warmup_iterations; ++i) scheme.generate_keypair();
+    for (uint64_t i = 0; i < config_.measured_iterations; ++i) {
+        HighResolutionTimer timer;
+        timer.start();
+        scheme.generate_keypair();
+        keygen_latencies.push_back(static_cast<double>(timer.elapsed_ns()));
     }
-
-    collect_signing_metrics(scheme, msg_1b, keypair.private_key, result.sign_1b, 1);
-    collect_signing_metrics(scheme, msg_1kb, keypair.private_key, result.sign_1kb, 1024);
-    collect_signing_metrics(scheme, msg_1mb, keypair.private_key, result.sign_1mb, 1024 * 1024);
-
-    if (sig_1b_result.first) {
-        collect_verification_metrics(scheme, msg_1b, sig_1b_result.first->data, 
-                                      keypair.public_key, result.verify_1b, 1);
+    result.aggregate_keygen = analyzer_.analyze(keygen_latencies);
+    
+    // Generate working keypair
+    auto kp_result = scheme.generate_keypair();
+    if (!kp_result.first) return result;
+    auto& kp = *kp_result.first;
+    result.public_key_bytes = kp.public_key.size();
+    result.private_key_bytes = kp.private_key.size();
+    
+    EnergyMeter energy;
+    
+    // Test each message size
+    for (auto msg_size : config_.message_sizes) {
+        ComprehensiveResult::SizeResult sr;
+        sr.message_size = msg_size;
+        auto msg = generate_message(msg_size);
+        
+        // Signing
+        std::vector<double> sign_latencies;
+        sign_latencies.reserve(config_.measured_iterations);
+        for (uint64_t i = 0; i < config_.warmup_iterations; ++i) scheme.sign(msg, kp.private_key);
+        if (energy.is_available()) energy.start();
+        for (uint64_t i = 0; i < config_.measured_iterations; ++i) {
+            HighResolutionTimer timer;
+            timer.start();
+            scheme.sign(msg, kp.private_key);
+            sign_latencies.push_back(static_cast<double>(timer.elapsed_ns()));
+        }
+        if (energy.is_available()) sr.sign_energy = energy.stop();
+        sr.sign_stats = analyzer_.analyze(sign_latencies, msg_size);
+        
+        // Get signature
+        auto sig_result = scheme.sign(msg, kp.private_key);
+        if (!sig_result.first) continue;
+        if (result.signature_bytes == 0) result.signature_bytes = sig_result.first->data.size();
+        
+        // Verification
+        std::vector<double> verify_latencies;
+        verify_latencies.reserve(config_.measured_iterations);
+        for (uint64_t i = 0; i < config_.warmup_iterations; ++i)
+            scheme.verify(msg, sig_result.first->data, kp.public_key);
+        if (energy.is_available()) energy.start();
+        for (uint64_t i = 0; i < config_.measured_iterations; ++i) {
+            HighResolutionTimer timer;
+            timer.start();
+            scheme.verify(msg, sig_result.first->data, kp.public_key);
+            verify_latencies.push_back(static_cast<double>(timer.elapsed_ns()));
+        }
+        if (energy.is_available()) sr.verify_energy = energy.stop();
+        sr.verify_stats = analyzer_.analyze(verify_latencies, msg_size + sig_result.first->data.size());
+        
+        result.size_results.push_back(std::move(sr));
     }
-
-    auto sig_1kb_result = scheme.sign(msg_1kb, keypair.private_key);
-    if (sig_1kb_result.first) {
-        collect_verification_metrics(scheme, msg_1kb, sig_1kb_result.first->data,
-                                      keypair.public_key, result.verify_1kb, 1024);
-    }
-
-    auto sig_1mb_result = scheme.sign(msg_1mb, keypair.private_key);
-    if (sig_1mb_result.first) {
-        collect_verification_metrics(scheme, msg_1mb, sig_1mb_result.first->data,
-                                      keypair.public_key, result.verify_1mb, 1024 * 1024);
-    }
-
+    
     return result;
 }
 
-void MetricsCollector::collect_keygen_metrics(SignatureScheme& scheme,
-                                               OperationMetrics& metrics) {
-    std::vector<double> latencies;
-    latencies.reserve(measured_iterations_);
-
-    for (uint64_t i = 0; i < warmup_iterations_; ++i) {
-        scheme.generate_keypair();
+std::vector<double> MetricsCollector::collect_latencies(const std::function<void()>& op, uint64_t iters) {
+    std::vector<double> l; l.reserve(iters);
+    for (uint64_t i = 0; i < iters; ++i) {
+        HighResolutionTimer t; t.start(); op();
+        l.push_back(static_cast<double>(t.elapsed_ns()));
     }
-
-    for (uint64_t i = 0; i < measured_iterations_; ++i) {
-        HighResolutionTimer timer;
-        timer.start();
-        scheme.generate_keypair();
-        latencies.push_back(static_cast<double>(timer.elapsed_ns()));
-    }
-
-    metrics.compute(latencies);
+    return l;
 }
 
-void MetricsCollector::collect_signing_metrics(SignatureScheme& scheme,
-                                                std::span<const std::byte> message,
-                                                std::span<const std::byte> private_key,
-                                                OperationMetrics& metrics,
-                                                uint64_t message_size) {
-    std::vector<double> latencies;
-    latencies.reserve(measured_iterations_);
-
-    for (uint64_t i = 0; i < warmup_iterations_; ++i) {
-        scheme.sign(message, private_key);
-    }
-
-    for (uint64_t i = 0; i < measured_iterations_; ++i) {
-        HighResolutionTimer timer;
-        timer.start();
-        scheme.sign(message, private_key);
-        latencies.push_back(static_cast<double>(timer.elapsed_ns()));
-    }
-
-    metrics.compute(latencies, message_size * measured_iterations_);
-}
-
-void MetricsCollector::collect_verification_metrics(SignatureScheme& scheme,
-                                                     std::span<const std::byte> message,
-                                                     std::span<const std::byte> signature,
-                                                     std::span<const std::byte> public_key,
-                                                     OperationMetrics& metrics,
-                                                     uint64_t message_size) {
-    std::vector<double> latencies;
-    latencies.reserve(measured_iterations_);
-
-    for (uint64_t i = 0; i < warmup_iterations_; ++i) {
-        scheme.verify(message, signature, public_key);
-    }
-
-    for (uint64_t i = 0; i < measured_iterations_; ++i) {
-        HighResolutionTimer timer;
-        timer.start();
-        scheme.verify(message, signature, public_key);
-        latencies.push_back(static_cast<double>(timer.elapsed_ns()));
-    }
-
-    metrics.compute(latencies, (message_size + signature.size()) * measured_iterations_);
-}
-
-BenchmarkSuite MetricsCollector::run_full_suite(
-    std::vector<std::unique_ptr<SignatureScheme>>& schemes) {
-
-    BenchmarkSuite suite;
-    suite.suite_timestamp = "generated";
-
-    for (auto& scheme : schemes) {
-        std::cout << "Benchmarking " << scheme->name() << "...\n";
-        auto result = run_algorithm_benchmark(*scheme);
-        suite.results.push_back(std::move(result));
-    }
-
-    return suite;
+std::vector<std::byte> MetricsCollector::generate_message(std::size_t size) {
+    RandomGenerator rng;
+    return rng.generate_bytes(size);
 }
 
 }
