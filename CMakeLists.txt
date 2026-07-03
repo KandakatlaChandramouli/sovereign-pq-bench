@@ -17,13 +17,23 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-add_compile_options(-Wall -Wextra -Wpedantic)
+add_compile_options(
+    -Wall
+    -Wextra
+    -Wpedantic
+)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
-    add_compile_options(-O3 -march=native -DNDEBUG)
+    add_compile_options(
+        -O3
+        -march=native
+        -DNDEBUG
+    )
 endif()
 
 find_package(benchmark REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_library(OQS_LIBRARY oqs PATHS /usr/local/lib REQUIRED)
 
 add_executable(
     sovereign_bench
@@ -33,11 +43,14 @@ add_executable(
 target_include_directories(
     sovereign_bench
     PRIVATE
-    include
+        include
 )
 
 target_link_libraries(
     sovereign_bench
     PRIVATE
-    benchmark::benchmark_main
+        benchmark::benchmark_main
+        benchmark::benchmark
+        OpenSSL::Crypto
+        ${OQS_LIBRARY}
 )
