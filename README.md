@@ -1,15 +1,46 @@
-# Sovereign-PQ-Bench: High-Assurance Cryptographic Profiling Framework
+# Sovereign Protocol: Post-Quantum Migration Truth Engine
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Standard: C++23](https://img.shields.io/badge/Standard-C%2B%2B23-blue.svg)](https://en.cppreference.com/w/cpp/23)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
-[![Precision: Nanosecond](https://img.shields.io/badge/Precision-Nanosecond-purple)]()
+> **"Quantifying the Cost of Sovereignty"**
 
-## 🏛️ Abstract
-This framework provides a standardized methodology for measuring the **computational, energy, and latency penalties** of migrating Critical Infrastructure (CI) to Post-Quantum Cryptography (PQC). It specifically targets **resource-constrained edge environments** (UAV Swarms, SCADA, IoT) relevant to National Data Sovereignty mandates.
+[![C++20](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
+[![CMake](https://img.shields.io/badge/CMake-3.20%2B-green.svg)](https://cmake.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![OpenSSL](https://img.shields.io/badge/OpenSSL-3.x-red.svg)](https://www.openssl.org/)
+[![liboqs](https://img.shields.io/badge/liboqs-0.10.0-orange.svg)](https://openquantumsafe.org/)
 
-## ⚡ Key Capabilities
-*   **Hybrid Toggling:** Hot-swapping between `ECDSA-P256` and `ML-DSA-44` (Dilithium).
-*   **Energy Profiling:** Direct Joules/Op measurement for battery-critical systems.
-*   **Network Simulation:** High-fidelity packet-loss modeling (0-50%) for desert/hostile environments.
-*   **IEEE-Compliant Output:** Auto-generation of Vector PDF charts for publication.
+## Mission
+
+We are building the **Truth Engine** that empirically measures the "Hardware Tax" of switching a nation's critical infrastructure from Legacy Cryptography (ECDSA-P256) to Post-Quantum Cryptography (ML-DSA-44/Dilithium).
+
+This is not a theoretical exercise. This is the undeniable evidence required for Gulf Governments to make their $100B infrastructure decisions.
+
+## The Contenders
+
+| Algorithm | Type | Standard | Role |
+|-----------|------|----------|------|
+| **ECDSA-P256** | Classical | FIPS 186-4 | The Old Standard |
+| **ML-DSA-44** | Post-Quantum | FIPS 204 | The New Sovereign Standard |
+
+## Architecture
+
+sovereign-pq-bench/
+├── include/sovereign/
+│ ├── crypto/ # Signature scheme abstractions
+│ │ ├── signature_scheme.hpp
+│ │ ├── ecdsa_engine.hpp
+│ │ └── ml_dsa_engine.hpp
+│ ├── metrics/ # Benchmarking & export
+│ │ ├── benchmark_result.hpp
+│ │ ├── metrics_collector.hpp
+│ │ ├── csv_exporter.hpp
+│ │ ├── json_exporter.hpp
+│ │ └── markdown_exporter.hpp
+│ └── utils/ # Timer, RNG
+├── src/ # Implementation files
+├── apps/ # CLI entry point
+├── benchmarks/ # Google Benchmark harness
+├── tests/ # Unit & integration tests
+├── scripts/ # Python visualization
+└── results/ # Evidence artifacts output
+q
+quit
