@@ -1,13 +1,13 @@
-#include <iostream>
+#include <benchmark/benchmark.h>
 
-int main()
+static void BM_EmptyLoop(benchmark::State& state)
 {
-    std::cout << "=====================================\n";
-    std::cout << " Sovereign PQ Benchmark Framework\n";
-    std::cout << " Version 0.1.0\n";
-    std::cout << "=====================================\n\n";
-
-    std::cout << "Framework bootstrapped successfully.\n";
-
-    return 0;
+    for (auto _ : state)
+    {
+        benchmark::DoNotOptimize(state.iterations());
+    }
 }
+
+BENCHMARK(BM_EmptyLoop);
+
+BENCHMARK_MAIN();
