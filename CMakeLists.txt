@@ -39,6 +39,7 @@ set(SOURCES
     src/metrics/markdown_exporter.cpp
     src/metrics/statistical_analysis.cpp
     src/metrics/energy_meter.cpp
+    src/metrics/microarch_profiler.cpp
     src/utils/random_generator.cpp
     src/utils/timer.cpp
 )
@@ -61,3 +62,5 @@ if(BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
 endif()
+add_executable(hardware_bench apps/hardware_bench.cpp)
+target_link_libraries(hardware_bench PRIVATE sovereign_engine)
