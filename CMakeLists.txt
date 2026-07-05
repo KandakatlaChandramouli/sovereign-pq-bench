@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(sovereign_pq_bench VERSION 2.2.0 LANGUAGES CXX C)
+project(sovereign_pq_bench VERSION 2.3.0 LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -53,6 +53,9 @@ target_compile_features(sovereign_engine PUBLIC cxx_std_20)
 
 add_executable(sovereign_cli apps/main.cpp)
 target_link_libraries(sovereign_cli PRIVATE sovereign_engine)
+
+add_executable(gulf_bench apps/full_gulf_benchmark.cpp)
+target_link_libraries(gulf_bench PRIVATE sovereign_engine)
 
 if(BUILD_TESTS)
     enable_testing()
