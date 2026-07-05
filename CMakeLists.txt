@@ -77,3 +77,11 @@ target_link_libraries(sovereign_advisor PRIVATE sovereign_engine)
 add_executable(intelligent_advisor apps/intelligent_advisor.cpp)
 target_include_directories(intelligent_advisor PRIVATE ${liboqs_BINARY_DIR}/include)
 target_link_libraries(intelligent_advisor PRIVATE sovereign_engine)
+
+# Sovereign-Shim Proxy Core
+add_executable(sovereign_shim 
+    sovereign_shim/src/shim_demo.cpp 
+    sovereign_shim/src/sovereign_shim.cpp
+)
+target_include_directories(sovereign_shim PRIVATE sovereign_shim/include)
+target_link_libraries(sovereign_shim PRIVATE pthread)
