@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(sovereign_pq_bench VERSION 2.0.0 LANGUAGES CXX C)
+project(sovereign_pq_bench VERSION 2.2.0 LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -29,6 +29,8 @@ set(SOURCES
     src/crypto/ed25519_engine.cpp
     src/crypto/ml_dsa_engine.cpp
     src/crypto/pq_engine.cpp
+    src/crypto/kem_engine.cpp
+    src/crypto/hash_engine.cpp
     src/metrics/metrics_collector.cpp
     src/metrics/system_info.cpp
     src/metrics/benchmark_result.cpp
