@@ -64,3 +64,16 @@ if(BUILD_TESTS)
 endif()
 add_executable(hardware_bench apps/hardware_bench.cpp)
 target_link_libraries(hardware_bench PRIVATE sovereign_engine)
+
+# Crypto-Agile Policy Engine
+
+add_executable(agile_demo apps/agile_demo.cpp src/agile/policy_engine.cpp)
+target_include_directories(agile_demo PRIVATE ${liboqs_BINARY_DIR}/include)
+target_link_libraries(agile_demo PRIVATE sovereign_engine)
+add_executable(sovereign_advisor apps/sovereign_advisor.cpp)
+target_include_directories(sovereign_advisor PRIVATE ${liboqs_BINARY_DIR}/include)
+target_link_libraries(sovereign_advisor PRIVATE sovereign_engine)
+
+add_executable(intelligent_advisor apps/intelligent_advisor.cpp)
+target_include_directories(intelligent_advisor PRIVATE ${liboqs_BINARY_DIR}/include)
+target_link_libraries(intelligent_advisor PRIVATE sovereign_engine)

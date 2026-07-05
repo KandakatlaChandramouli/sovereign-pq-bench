@@ -1,0 +1,101 @@
+id,domain,name,entity,tech_stack,risk_level,recommendation
+1,Energy,Ghawar Wellhead Telemetry,Saudi Aramco,ECDSA->Falcon-512 ARM Cortex-M LoRa,Low,Falcon-512
+2,Energy,ADNOC Ruwais SCADA Integrity,ADNOC,ML-DSA-44 Modbus/TCP HNDL protection,Medium,ML-DSA-44
+3,Energy,KPC Offshore Rig Satellite Mesh,Kuwait Petroleum,SPHINCS+-128f MTU satellite analysis,High,Falcon-512
+4,Energy,Saudi-Bahrain Subsea Pipeline,Saudi Aramco/BAPCO,ML-KEM-512 ARM Cortex-M cache thrashing,Medium,ML-KEM-512
+5,Energy,PDO Desert Gathering Station IoT,Petroleum Development Oman,Falcon-1024 heat-induced clock drift,Medium,Falcon-512
+6,Energy,QatarEnergy LNG Tanker Telemetry,QatarEnergy,ML-DSA-65 satellite HF context switch,Medium,ML-DSA-44
+7,Energy,ADNOC Habshan-Fujairah Pipeline Actuators,ADNOC,FrodoKEM-976 16-bit embedded memory constraints,Critical,FrodoKEM-976
+8,Energy,Saudi Aramco Yanbu DCS Boot Cycles,Saudi Aramco,Classic McEliece memory loading boot latency,High,SPHINCS+-256s
+9,Energy,SASREF Cracker Emergency Shutdown,SASREF,ML-DSA-44 sub-ms safety loops IPC degradation,Critical,ML-DSA-44
+10,Energy,GCC Interconnected Power Grid Cores,GCC IA,BIKE-L1 multi-state HV substation routers,Critical,BIKE-L1
+11,Sovereign Cloud,UAE-Pass PQ Core 10M verifications,UAE Cyber Security Council,RSA-4096 to ML-DSA-44,Critical,ML-DSA-44
+12,Sovereign Cloud,Absher Core Database Enclaves,Saudi SDAIA,ML-KEM-768 millions parallel context-switch,Critical,ML-KEM-768
+13,Sovereign Cloud,ADDA Sovereign Cloud Multi-Tenant,Abu Dhabi Digital Authority,SPHINCS+-128s LLC cache misses,High,SPHINCS+-128s
+14,Sovereign Cloud,CAIT Kuwait Citizen Registries,Kuwait CAIT,ML-DSA 14x key size DB storage layout,Medium,ML-DSA-44
+15,Sovereign Cloud,Qatar QID Biometric Smart Cards,Qatar MOI,Falcon-512 flash memory certificate embedding,Medium,Falcon-512
+16,Sovereign Cloud,Oman Royal Police Passport Verification,Oman ROP,ML-DSA-65 P99 tail-latency high volume,High,ML-DSA-65
+17,Sovereign Cloud,Bahrain iGA Sovereign Cloud AWS,Bahrain iGA,ML-DSA-87 MTU fragmentation gov docs,High,Falcon-512
+18,Sovereign Cloud,Dubai Paperless Microservices,Dubai Digital Authority,Go GC pauses concurrent PQC tokens millions,Medium,ML-DSA-44
+19,Sovereign Cloud,Riyadh Smart Waste NB-IoT Grid,Riyadh Municipality,SPHINCS+ packet loss Narrowband IoT,High,Falcon-512
+20,Sovereign Cloud,GCC Inter-Governmental Secure Comms,GCC Secretariat,HQC-128 cross-border ministerial feeds,Critical,HQC-128
+21,Defense,EDGE Al Tariq Precision Munitions,EDGE Group UAE,Falcon-512 nanosecond verification high-G,Critical,Falcon-512
+22,Defense,GAMI Autonomous Drone Swarm Mesh,Saudi GAMI,ML-DSA-44 military RF packet loss,Critical,ML-DSA-44
+23,Defense,UAE GlobalEye AEW&C Radar Telemetry,UAE Air Force,ML-KEM-1024 L1 cache thrashing high BW,Critical,ML-KEM-1024
+24,Defense,Kuwait Eurofighter Ground Telemetry,Kuwait Air Force,Falcon-1024 hardware offload IPC,Critical,Falcon-512
+25,Defense,EDGE Hunter UAV Video Encryption,EDGE Group UAE,SHA3-512 ML-KEM-768 real-time video,Critical,ML-KEM-768
+26,Defense,SAMI Land Systems Vetronics CAN-bus,Saudi Military Industries,Low-overhead PQC context switches,High,ML-DSA-44
+27,Defense,Oman Coast Guard Autonomous Patrol,Oman Navy,SPHINCS+-192s satellite degradation long-range,High,SPHINCS+-128s
+28,Defense,Bahrain Navy Fast Attack EW Jammers,Bahrain Navy,BIKE-L1 electronic warfare resilience,Critical,BIKE-L1
+29,Defense,EDGE Garmoosha UAV Flight Controller,EDGE Group UAE,ML-DSA-44 flight control memory bus contention,Critical,ML-DSA-44
+30,Defense,GCC Joint Defense Satellite Downlink,GCC Defense Council,Classic McEliece strategic isolation,Critical,SPHINCS+-256s
+31,Finance,SAMA Interbank RTGS System,Saudi Central Bank,ML-DSA-65 clearing networks,Critical,ML-DSA-65
+32,Finance,CBUAE CBDC Architecture 50K TPS,Central Bank UAE,Falcon-512 ledger validation,Critical,Falcon-512
+33,Finance,ADGM HFT Engine nanosecond,ADGM Abu Dhabi,ML-KEM-512 cache miss optimization,Critical,ML-KEM-512
+34,Finance,Mubadala ADIA Cross-Border Settlement,Mubadala/ADIA,Classic McEliece multi-billion,Critical,SPHINCS+-256s
+35,Finance,KIA Treasury Access Infrastructure,Kuwait Investment Authority,Context switches high-core enterprise,High,ML-DSA-44
+36,Finance,QCB Real-Time Clearing Grid,Qatar Central Bank,ML-DSA-87 IP fragmentation dark fiber,High,Falcon-512
+37,Finance,Bahrain Benefit POS Retail Switches,Bahrain Benefit Network,PQC verification consumer POS,Medium,ML-DSA-44
+38,Finance,SNB Global SWIFT Gateway,Saudi National Bank,ML-KEM-1024 corporate banking,Critical,ML-KEM-1024
+39,Finance,DGCX Settlement Matching Engine,Dubai Gold Commodities,IPC zero-copy PQC verifications,High,ML-DSA-44
+40,Finance,Oman Central Bank Forex Routing,Oman Central Bank,HQC-128 interbank settlements,Critical,HQC-128
+41,Telecom,STC 5G Core UPF TLS 1.3,STC Saudi Arabia,ML-KEM-768 packet throughput,Critical,ML-KEM-768
+42,Telecom,e& Edge CDN io_uring Zero-Copy,e& UAE,Falcon-512 fragmented signatures,High,Falcon-512
+43,Telecom,du VoLTE VoNR IMS Signaling,du UAE,ML-DSA-44 CPU thread starvation,High,ML-DSA-44
+44,Telecom,Ooredoo FTTH PPPoE Authentication,Ooredoo Qatar,Falcon-512 L1 cache thrashing,Medium,Falcon-512
+45,Telecom,Zain Mobile Money API Gateway,Zain Kuwait,PQC library integration API orchestration,Medium,ML-DSA-44
+46,Telecom,Omantel Subsea Cable MACsec IPsec,Omantel Oman,Inline PQC MACsec tunnels,High,ML-KEM-512
+47,Telecom,Batleco SD-WAN Hybrid VPN,Batleco Bahrain,Ed25519 ML-DSA-44 MTU fragmentation,Medium,ML-DSA-44
+48,Telecom,STC K8s Ingress TLS Decrypt,STC Saudi Arabia,ML-KEM-1024 context switches,Critical,ML-KEM-1024
+49,Telecom,Vodafone Edge Lattice Vector,Vodafone Qatar,Custom memory lattice-based edge servers,Medium,ML-DSA-44
+50,Telecom,GCC Roaming BIKE-L1 Subscriber,GCC Telecom,BIKE-L1 roaming authentication,Critical,BIKE-L1
+51,Mega Projects,NEOM The Line Cognitive City,NEOM,Falcon-512 millions embedded sensors,Critical,Falcon-512
+52,Mega Projects,NEOM Oxagon Autonomous Port,NEOM,ML-DSA-44 industrial Wi-Fi packet loss,High,ML-DSA-44
+53,Mega Projects,Red Sea Global Smart Resort,Red Sea Global,ML-KEM-512 solar-powered smart locks,Medium,ML-KEM-512
+54,Mega Projects,DP World Jebel Ali AGV Fleet,DP World Dubai,Low PQC private LTE fragmentation,High,Falcon-512
+55,Mega Projects,SPARK LoRaWAN Asset Tags,King Salman Energy Park,SPHINCS+-128f ultra-low-power,High,SPHINCS+-128s
+56,Mega Projects,Jeddah Airport Baggage System,King Abdulaziz Airport,ML-DSA-44 logistics token verification,Medium,ML-DSA-44
+57,Mega Projects,Khalifa Port TOS Real-Time,Abu Dhabi Ports,Context switches industrial edge,High,ML-DSA-44
+58,Mega Projects,Lusail V2X Traffic Management,Qatar Lusail City,ML-DSA-65 vehicle-to-infrastructure,High,ML-DSA-65
+59,Mega Projects,Duqm Drone Corridors RF,Oman Duqm,RF packet fragmentation high-velocity,High,Falcon-512
+60,Mega Projects,Silk City Bridge Sensors,Kuwait Silk City,Falcon-1024 structural integrity,Medium,Falcon-512
+61,Healthcare,G42 Emirati Genome Program,G42 Healthcare,Classic McEliece DNA storage long-term,Critical,SPHINCS+-256s
+62,Healthcare,KFSH Medical AI Cloud Pipeline,King Faisal Hospital,ML-KEM-1024 cache line thrashing,Critical,ML-KEM-1024
+63,Healthcare,CCAD Robotic Surgery Video,Cleveland Clinic Abu Dhabi,Falcon-512 sub-ms frame verification,Critical,Falcon-512
+64,Healthcare,DHA Unified EHR Exchange,Dubai Health Authority,ML-DSA-65 MTU fragmentation medical images,High,ML-DSA-65
+65,Healthcare,Hamad BioBank Research Vault,Hamad Medical Qatar,SPHINCS+-128s database access tokens,High,SPHINCS+-128s
+66,Healthcare,Kuwait Pharma Supply Chain,Kuwait Ministry of Health,ML-DSA-44 handheld warehouse scanners,Medium,ML-DSA-44
+67,Healthcare,Oman Tele-Medicine Rural,Sultan Qaboos University,Low-bandwidth rural PQC payloads,High,Falcon-512
+68,Healthcare,Bahrain BLE Patient Monitoring,King Hamad Hospital,Falcon-512 BLE payload limitations,Medium,Falcon-512
+69,Healthcare,Seha Virtual Hospital Satellite,Saudi Ministry of Health,HQC-128 remote medical terminals,High,HQC-128
+70,Healthcare,GCC Health Cross-Border Disease,GCC Health Council,FrodoKEM-976 infectious disease registries,Critical,FrodoKEM-976
+71,Water,SWCC Jubail Desalination PLC,SWCC Saudi Arabia,ML-DSA-44 Modbus/TCP real-time loop,Critical,ML-DSA-44
+72,Water,DEWA Hassyan Clean Coal SCADA,DEWA Dubai,Cache miss tracking industrial control,Medium,Falcon-512
+73,Water,Kahramaa Smart Water Metering 1M,Qatar Kahramaa,SPHINCS+ packet fragmentation cellular,High,Falcon-512
+74,Water,Taqa Water Transmission Pipeline,Abu Dhabi Taqa,Falcon-1024 flash storage solar RTUs,Medium,Falcon-512
+75,Water,Kuwait Doha Desalination Control,Kuwait Ministry,ML-KEM-768 context switches control nodes,Critical,ML-KEM-768
+76,Water,Diam Public Water Smart Grid,Oman Diam,BIKE-L1 desert satellite links,High,BIKE-L1
+77,Water,Bahrain EWA Substation SCADA,Bahrain EWA,Firmware integrity memory constraints,Medium,ML-DSA-44
+78,Water,NWC Wastewater SCADA Arrays,Saudi NWC,ML-DSA-44 automated valve control,Medium,ML-DSA-44
+79,Water,SEWA Grid Optimization Core,Sharjah SEWA,Database update smart meter reports,Medium,ML-DSA-44
+80,Water,GCC Unified Water Security,GCC Water Council,HQC-128 cross-border storage records,Critical,HQC-128
+81,Maritime,King Abdullah Port AGV Terminal,Saudi MAWANI,Falcon-512 automated crane operations,High,Falcon-512
+82,Maritime,DP World Jebel Ali Gate Control,DP World Dubai,ML-DSA-65 commercial shipping manifests,High,ML-DSA-65
+83,Maritime,Salalah VTS Radar Tracking,Oman Asyad Group,Cache thrashing PQC-encrypted radar,Medium,Falcon-512
+84,Maritime,Bahrain Customs Radiation Scanners,Bahrain Ports,ML-KEM-1024 high-resolution imaging,Critical,ML-KEM-1024
+85,Maritime,Jeddah Islamic Port Logistics,Saudi MAWANI,IP fragmentation terminal Wi-Fi,High,Falcon-512
+86,Maritime,Mussafah Channel Telemetry Buoys,Abu Dhabi Ports,Falcon-1024 battery-powered marine sensors,Medium,Falcon-512
+87,Maritime,Shuwaikh Hazardous Cargo DB,Kuwait Ports,Context switches real-time manifests,High,ML-DSA-44
+88,Maritime,Hamad Port Cold-Chain Storage IoT,Qatar Ports,Falcon-512 low-power temperature sensors,Medium,Falcon-512
+89,Maritime,Fujairah Bunkering Fuel Telemetry,Fujairah Port,ML-DSA-44 high-frequency ship-to-shore,High,ML-DSA-44
+90,Maritime,GCC Maritime Security Coordination,GCC Maritime,FrodoKEM-976 cross-border shipping intelligence,Critical,FrodoKEM-976
+91,Space,MBZ-SAT Earth Observation Ground,MBRSC UAE,ML-KEM-1024 high-rate image downloads,Critical,ML-KEM-1024
+92,Space,Saudi Cubesat Telemetry Downlink,Saudi Space Agency,ML-DSA-44 radio frequency fragmentation,High,ML-DSA-44
+93,Space,ArabSat Fleet C2 Communications,ArabSat Riyadh,Cache line thrashing ground control PQC,High,Falcon-512
+94,Space,Thuraya Satellite Mobile Core,Thuraya UAE,Falcon-512 context switches voice setup,High,Falcon-512
+95,Space,Oman Rocket Launch Telemetry,Oman Space Zone,Falcon-1024 nanosecond propulsion safety,Critical,Falcon-512
+96,Space,KuwaitSat-1 Research Platform,Kuwait Space,BIKE-L1 memory micro-satellite processors,High,BIKE-L1
+97,Space,Light-1 Nanosatellite Gamma-Ray,Bahrain Space,PQC data framing weak ground tracking,Medium,Falcon-512
+98,Space,Rashid Lunar Rover Deep-Space,MBRSC UAE,ML-KEM-768 deep-space communication,Critical,ML-KEM-768
+99,Space,Saudi Space Surveillance Radar,Saudi Space Agency,ML-DSA-87 multi-target LEO tracking,High,ML-DSA-65
+100,Space,GCC Civil Space Observation Archive,GCC Space Agency,Classic McEliece planetary archives,Critical,SPHINCS+-256s
