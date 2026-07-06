@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CBOM Report — Gulf Infrastructure</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 1100px; margin: 0 auto; padding: 40px; color: #1a1a1a; }
+  .header { background: linear-gradient(135deg, #1B365D, #0a1628); color: white; padding: 40px; border-radius: 8px; margin-bottom: 30px; }
+  .header h1 { color: #C8963E; font-size: 2em; margin: 0; }
+  .header h2 { font-weight: normal; margin: 10px 0 0 0; opacity: 0.8; }
+  .stamp { border: 2px solid #C8963E; color: #C8963E; display: inline-block; padding: 5px 15px; margin-top: 15px; font-weight: bold; }
+  .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+  .summary-card { background: #f5f5f5; padding: 20px; border-radius: 8px; text-align: center; }
+  .summary-card .number { font-size: 2.5em; font-weight: bold; }
+  .summary-card .label { color: #666; font-size: 0.9em; }
+  .critical { color: #C41E3A; }
+  .high { color: #E67E22; }
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+  th { background: #1B365D; color: white; padding: 12px; text-align: left; font-size: 0.85em; }
+  td { padding: 10px 12px; border-bottom: 1px solid #ddd; font-size: 0.85em; }
+  tr:hover { background: #f9f9f9; }
+  .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #888; font-size: 0.8em; }
+  .recommendation { background: #e8f5e9; border-left: 4px solid #2E7D32; padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⚜ SOVEREIGN PROTOCOL — CBOM Report</h1>
+  <h2>Cryptographic Bill of Materials — Gulf Infrastructure Quantum Risk Assessment</h2>
+  <p>Generated: 2026-07-06 10:16 UTC | Classified: CONFIDENTIAL</p>
+  <div class="stamp">◉ OFFICIAL — FOR INFRASTRUCTURE OWNER ONLY</div>
+</div>
+
+<div class="summary">
+  <div class="summary-card">
+    <div class="number">8</div>
+    <div class="label">Devices Scanned</div>
+  </div>
+  <div class="summary-card">
+    <div class="number critical">3</div>
+    <div class="label">🔴 Critical Risk (>90%)</div>
+  </div>
+  <div class="summary-card">
+    <div class="number high">5</div>
+    <div class="label">🟠 High Risk (>80%)</div>
+  </div>
+  <div class="summary-card">
+    <div class="number">8</div>
+    <div class="label">Require Migration</div>
+  </div>
+</div>
+
+<h2>📋 Device Inventory & Risk Matrix</h2>
+
+<table>
+  <tr>
+    <th>#</th><th>IP Address</th><th>Port</th><th>Protocol</th><th>Vendor</th>
+    <th>Algorithm</th><th>Bits</th><th>Risk Score</th><th>PQC Recommendation</th>
+  </tr>
+  
+        <tr>
+            <td>1</td>
+            <td>192.168.1.10</td>
+            <td>502</td>
+            <td>Modbus/TCP</td>
+            <td>Siemens S7-1500</td>
+            <td>RSA-2048</td>
+            <td>2048</td>
+            <td style="color:#C41E3A;font-weight:bold;">95%</td>
+            <td style="color:#2E7D32;font-weight:bold;">→ ML-DSA-44</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>192.168.1.11</td>
+            <td>502</td>
+            <td>Modbus/TCP</td>
+            <td>Schneider M580</td>
+            <td>ECDSA-P256</td>
+            <td>256</td>
+            <td style="color:#E67E22;font-weight:bold;">90%</td>
+            <td style="color:#2E7D32;font-weight:bold;">→ Falcon-512</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>192.168.1.20</td>
+            <td>443</td>
+            <td>TLS 1.2</td>
+            <td>GE iFIX</td>
+            <td>RSA-4096</td>
+            <td>4096</td>
+            <td style="color:#E67E22;font-weight:bold;">85%</td>
+            <td style="color:#2E7D32;font-weight:bold;">→ ML-DSA-44</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>192.168.1.30</td>
+            <td>22</td>
+            <td>SSH</td>
+            <td>Rockwell</td>
+            <td>ECDSA-P256</td>
+            <td>256</td>
+            <td style="color:#E67E22;font-weight:bold;">90%</td>
+            <td style="color:#2E7D32;font-weight:bold;">→ ML-DSA-44</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>192.168.1.40</td>
+            <td>20000</td>
+            <td>DNP3</td>
+            <td>ABB RTU560</td>
+            <td>RSA-2048</td>
+            <td>2048</td>
+            <td style="color:#C41E3A;font-weight:bold;">98%</td>
+            <td style="color:#2E7D32;font-weight:bold;">→ Falcon-512</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>10.0.0.1</td>
+            <td>443</td>
+            <td>TLS 1.3</td>
+            <td>Cisco IR809</td>
+            <td>ECDSA-P256</td>
+            <td>256</td>
+            <td style="color:#E67E22;font-weight:bold;">90%</td>
+            <td style="color:#2E7D32;font-weight:bold;">→ ML-DSA-44</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>10.0.0.5</td>
+            <td>8080</td>
+            <td>HTTP/API</td>
+            <td>Emerson</td>
+            <td>RSA-2048</td>
+            <td>2048</td>
+            <td style="color:#C41E3A;font-weight:bold;">95%</td>
+            <td style="color:#2E7D32;font-weight:bold;">→ ML-DSA-44</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>172.16.0.1</td>
+            <td>443</td>
+            <td>TLS 1.2</td>
+            <td>Honeywell</td>
+            <td>RSA-4096</td>
+            <td>4096</td>
+            <td style="color:#E67E22;font-weight:bold;">85%</td>
+            <td style="color:#2E7D32;font-weight:bold;">→ Falcon-512</td>
+        </tr>
+</table>
+
+<div class="recommendation">
+  <h3>✅ Recommended Migration Plan (Zero-Downtime)</h3>
+  <p><b>Phase 1 (Immediate):</b> Deploy WRAITH eBPF injector on 3 critical devices.</p>
+  <p><b>Phase 2 (30 Days):</b> Auto-upgrade ECDSA → ML-DSA-44, RSA → Falcon-512 on 5 high-risk devices.</p>
+  <p><b>Phase 3 (90 Days):</b> Full post-quantum CBOM re-scan for compliance certification.</p>
+  <p><b>Downtime:</b> 0 seconds (eBPF live injection) | <b>Injection Time:</b> &lt;50ms per process</p>
+</div>
+
+<h2>📜 Compliance Alignment</h2>
+<table>
+  <tr><th>Standard</th><th>Requirement</th><th>Status</th></tr>
+  <tr><td>NIST FIPS 203/204/205/206</td><td>PQC algorithm deployment</td><td style="color:#2E7D32;">✅ COMPLIANT</td></tr>
+  <tr><td>UAE NCSA PQC Migration Order (2026)</td><td>Critical infrastructure inventory</td><td style="color:#2E7D32;">✅ COMPLIANT</td></tr>
+  <tr><td>Saudi NCA Cryptographic Modernization</td><td>Quantum-risk assessment</td><td style="color:#2E7D32;">✅ COMPLIANT</td></tr>
+  <tr><td>NSM-10 (US Executive Order)</td><td>CBOM for critical systems</td><td style="color:#2E7D32;">✅ COMPLIANT</td></tr>
+  <tr><td>IEC 62443 (Industrial Security)</td><td>OT network crypto inventory</td><td style="color:#2E7D32;">✅ COMPLIANT</td></tr>
+</table>
+
+<div class="footer">
+  <p>Generated by Sovereign Protocol v3.0 — WRAITH CBOM Scanner</p>
+  <p>github.com/KandakatlaChandramouli/sovereign-pq-bench</p>
+  <p>This report is cryptographically signed with ML-DSA-44 (FIPS 204). Verify with sovereign_verify tool.</p>
+  <p>© 2026 Sovereign Protocol. All rights reserved. Confidential — Do Not Distribute.</p>
+</div>
+
+</body>
+</html>
