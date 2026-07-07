@@ -1,0 +1,27 @@
+╔══════════════════════════════════════════════════════════════╗
+║  SOVEREIGN PROTOCOL — Complete Gulf PQC Evidence Matrix     ║
+╚══════════════════════════════════════════════════════════════╝
+
+System: AMD EPYC 7763 64-Core Processor | OpenSSL OpenSSL 3.0.13 30 Jan 2024
+
+═══ SIGNATURES ═══
+ECDSA-P256              FIPS 186-4        1454.2us  91B  71B  Classical
+Ed25519                 RFC 8032           167.6us  32B  64B  Classical
+ML-DSA-44               FIPS 204           160.5us  1312B  2420B  Lattice PQ
+ML-DSA-65               FIPS 204           334.7us  1952B  3309B  Lattice PQ
+ML-DSA-87               FIPS 204           174.9us  2592B  4627B  Lattice PQ
+Falcon-512              FIPS 206           251.4us  897B  658B  Lattice PQ
+Falcon-1024             FIPS 206           671.6us  1793B  1272B  Lattice PQ
+SPHINCS+-128s           FIPS 205        209257.6us  32B  7856B  Hash PQ
+SPHINCS+-256s           FIPS 205        318278.8us  64B  29792B  Hash PQ
+
+═══ KEY ENCAPSULATION ═══
+ML-KEM-512                  FIPS 203            21.6us  800B  768B  Lattice
+ML-KEM-768                  FIPS 203            27.7us  1184B  1088B  Lattice
+ML-KEM-1024                 FIPS 203            61.1us  1568B  1568B  Lattice
+Classic-McEliece-348864     NIST R4             29.5us  261120B  96B  Code
+HQC-128                     NIST R4           4519.7us  2249B  4433B  Code
+BIKE-L1                     NIST R4             44.1us  1541B  1573B  Code
+FrodoKEM-976-AES            NIST R4            792.8us  15632B  15744B  LWE
+
+✅ Complete Gulf PQC Matrix exported to results/gulf_complete_matrix.csv
