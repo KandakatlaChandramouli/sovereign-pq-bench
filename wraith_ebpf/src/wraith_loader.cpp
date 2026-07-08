@@ -1,3 +1,5 @@
+#include <chrono>
+#include <thread>
 // ═══════════════════════════════════════════════════════════
 // WRAITH LOADER — User-space eBPF Loader + Event Processor
 // Compile: g++ -O2 wraith_loader.cpp -o wraith_loader -lbpf -lelf -lz

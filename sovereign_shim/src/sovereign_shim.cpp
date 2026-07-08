@@ -59,8 +59,8 @@ std::string PolicyEngine::policy_name(PqcPolicy p) const {
 SovereignProxyShim::SovereignProxyShim(
     const std::string& listen_addr, int listen_port,
     const std::string& upstream_addr, int upstream_port)
-    : listen_addr_(listen_addr), listen_port_(listen_port),
-      upstream_addr_(upstream_addr), upstream_port_(upstream_port) {
+    : listen_addr_(listen_addr), upstream_addr_(upstream_addr),
+      listen_port_(listen_port), upstream_port_(upstream_port) {
     
     std::cout << "╔══════════════════════════════════════════════════════════════╗\n";
     std::cout << "║  SOVEREIGN-SHIM PROXY CORE v1.0                             ║\n";

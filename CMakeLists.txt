@@ -46,8 +46,9 @@ set(SOURCES
 
 add_library(sovereign_engine STATIC ${SOURCES})
 target_include_directories(sovereign_engine
-    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    PRIVATE ${liboqs_BINARY_DIR}/include
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        ${liboqs_BINARY_DIR}/include
 )
 target_link_libraries(sovereign_engine PUBLIC OpenSSL::Crypto Threads::Threads oqs)
 target_compile_features(sovereign_engine PUBLIC cxx_std_20)

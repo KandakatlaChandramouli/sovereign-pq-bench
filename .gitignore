@@ -67,3 +67,27 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# Research Artifacts
+artifacts/
+datasets/
+paper/build/
+
+# Build
+build/
+compile_commands.json
+
+# IDE
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+*.gcda
+*.gcno
+*.profraw
+*.profdata
+
+# Benchmark Outputs
+results/generated/
+

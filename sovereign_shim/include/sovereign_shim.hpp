@@ -123,7 +123,7 @@ private:
     std::unique_ptr<std::thread> monitor_thread_;
     
     HardwareTelemetry latest_telemetry_;
-    std::mutex telemetry_mutex_;
+    mutable std::mutex telemetry_mutex_;
 };
 
 // ── Zero-copy buffer pool for io_uring-style operations ──
