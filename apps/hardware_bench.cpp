@@ -1,3 +1,5 @@
+#include <string>
+static bool pmu_available = true;
 #include "sovereign/crypto/signature_scheme.hpp"
 #include "sovereign/crypto/ecdsa_engine.hpp"
 #include "sovereign/crypto/ed25519_engine.hpp"
