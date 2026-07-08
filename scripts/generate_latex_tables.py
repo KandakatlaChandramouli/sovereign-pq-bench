@@ -1,6 +1,6 @@
 import pandas as pd, os
 
-csv_path = 'results/processed/gulf_complete_matrix.csv'
+csv_path = 'results/gulf_complete_matrix.csv'
 if not os.path.exists(csv_path):
     print(f"CSV not found: {csv_path}")
     exit(1)

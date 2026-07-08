@@ -1,0 +1,19 @@
+\begin{table}
+\caption{Performance of Signature Algorithms.}
+\label{tab:sig_perf}
+\begin{tabular}{lrrr}
+\toprule
+Algorithm & Latency (µs) & Key Size (B) & Signature Size (B) \\
+\midrule
+ECDSA-P256 & 1925.470000 & 91 & 72 \\
+Ed25519 & 180.988000 & 32 & 64 \\
+ML-DSA-44 & 55.493000 & 1312 & 2420 \\
+ML-DSA-65 & 193.541000 & 1952 & 3309 \\
+ML-DSA-87 & 113.572000 & 2592 & 4627 \\
+Falcon-512 & 339.373000 & 897 & 654 \\
+Falcon-1024 & 484.805000 & 1793 & 1272 \\
+SPHINCS+-128s & 209550.000000 & 32 & 7856 \\
+SPHINCS+-256s & 344324.000000 & 64 & 29792 \\
+\bottomrule
+\end{tabular}
+\end{table}
