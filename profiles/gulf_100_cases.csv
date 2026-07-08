@@ -99,3 +99,13 @@ id,domain,name,entity,tech_stack,risk_level,recommendation
 98,Space,Rashid Lunar Rover Deep-Space,MBRSC UAE,ML-KEM-768 deep-space communication,Critical,ML-KEM-768
 99,Space,Saudi Space Surveillance Radar,Saudi Space Agency,ML-DSA-87 multi-target LEO tracking,High,ML-DSA-65
 100,Space,GCC Civil Space Observation Archive,GCC Space Agency,Classic McEliece planetary archives,Critical,SPHINCS+-256s
+101,TLS Migration,ECDSA→ML-DSA-44 Handshake,TLS/Web,Latency+18% handshake time,Medium,ML-DSA-44
+102,VPN Migration,RSA→ML-KEM-768 Tunnel,VPN,Setup+12% CPU,Medium,ML-KEM-768
+103,IoT Deployment,ARM Cortex-M ML-KEM-768,IoT,Flash+45KB RAM constraint,High,Falcon-512
+104,Blockchain Consensus,ECDSA→ML-DSA-44 Block Verification,Blockchain,Block time+8% with hybrid,Medium,Hybrid
+105,PKI Certificate Chain,ECDSA→ML-DSA Certificates,PKI,Certificate chain grows 4x,High,Falcon-512
+106,Edge Computing,SPHINCS+ on Raspberry Pi,Edge,Exceeds memory (OOM) with SPHINCS+,Critical,Falcon-512
+107,Cloud Microservices,ML-DSA-44 mTLS in Kubernetes,Cloud,Pod startup+22ms (12%),Medium,ML-DSA-44
+108,Satellite Telemetry,ML-DSA-44 over low-bandwidth,Space,MTU fragmentation doubles latency,High,Falcon-512
+109,Smart Grid Meters,ML-DSA-65 battery impact,Utilities,Battery life-15% with ML-DSA,High,Falcon-512
+110,Central Bank CBDC,SPHINCS+-256s for settlement,Finance,Settlement latency+340%,Critical,Hybrid

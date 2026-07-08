@@ -1,0 +1,17 @@
+category,algorithm,operation,mean_us,key_bytes,sig_or_ct_bytes
+Signature,ECDSA-P256,Sign,1317.22,91,70
+Signature,Ed25519,Sign,158.245,32,64
+Signature,ML-DSA-44,Sign,198.701,1312,2420
+Signature,ML-DSA-65,Sign,157.543,1952,3309
+Signature,ML-DSA-87,Sign,193.231,2592,4627
+Signature,Falcon-512,Sign,360.583,897,654
+Signature,Falcon-1024,Sign,490.565,1793,1273
+Signature,SPHINCS+-128s,Sign,213712,32,7856
+Signature,SPHINCS+-256s,Sign,345381,64,29792
+KEM,ML-KEM-512,Encaps,12.363,800,768
+KEM,ML-KEM-768,Encaps,16.34,1184,1088
+KEM,ML-KEM-1024,Encaps,22.622,1568,1568
+KEM,Classic-McEliece-348864,Encaps,41.758,261120,96
+KEM,HQC-128,Encaps,5058.36,2249,4433
+KEM,BIKE-L1,Encaps,43.762,1541,1573
+KEM,FrodoKEM-976-AES,Encaps,789.874,15632,15744

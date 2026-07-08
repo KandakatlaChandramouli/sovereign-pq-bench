@@ -40,6 +40,7 @@ set(SOURCES
     src/metrics/statistical_analysis.cpp
     src/metrics/energy_meter.cpp
     src/metrics/microarch_profiler.cpp
+    src/metrics/memory_tracker.cpp
     src/utils/random_generator.cpp
     src/utils/timer.cpp
 )

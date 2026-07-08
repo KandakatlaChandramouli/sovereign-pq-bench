@@ -1,3 +1,4 @@
+#include "sovereign/metrics/statistical_analysis.hpp"
 #include "sovereign/crypto/signature_scheme.hpp"
 #include "sovereign/crypto/ecdsa_engine.hpp"
 #include "sovereign/crypto/ed25519_engine.hpp"
@@ -33,7 +34,7 @@ static KemResult quick_kem(sovereign::FullKemAlgorithm algo) {
     auto kp = kem.keygen();
     if (!kp.first) return {0,0,0,0};
     auto ct = kem.encaps(kp.first->public_key);
-    kem.decaps(ct.first->ct, kp.first->private_key);
+    (void)kem.decaps(ct.first->ct, kp.first->private_key);
     return {ct.first->enc_us, ct.first->dec_us, kem.pk_size(), kem.ct_size()};
 }
 

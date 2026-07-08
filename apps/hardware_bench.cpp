@@ -35,7 +35,7 @@ static HwSigResult hw_bench_sig(auto& engine, int iters = 100) {
     // Signing benchmark
     profiler.start();
     auto t1 = std::chrono::high_resolution_clock::now();
-    for (int i = 0; i < iters; i++) engine.sign(msg, kp.first->private_key);
+    for (int i = 0; i < iters; i++) (void)engine.sign(msg, kp.first->private_key);
     auto t2 = std::chrono::high_resolution_clock::now();
     r.sign_hw = profiler.stop();
     r.sign_us = std::chrono::duration<double,std::micro>(t2-t1).count() / iters;
@@ -77,7 +77,7 @@ int main() {
               << std::setw(10) << "Vfy(µs)" << std::setw(10) << "CacheMiss%" << std::setw(10) << "BranchMiss%"
               << std::setw(8) << "IPC" << std::setw(10) << "Key(B)" << std::setw(10) << "Sig(B)"
               << std::setw(12) << "MTU Pkts\n";
-    std::cout << std::string(112, '─') << "\n";
+    std::cout << std::string(112, '-') << "\n";
     
     auto run_sig = [&](auto& engine) {
         auto r = hw_bench_sig(engine, 50);
@@ -86,7 +86,6 @@ int main() {
         // Network MTU analysis
         const int MTU = 1500, MSS = 1460;
         int sig_packets = std::ceil((double)r.sig_bytes / MSS);
-        int key_packets = std::ceil((double)r.pk_bytes / MSS);
         double mtu_overhead = ((double)(sig_packets * MTU) / r.sig_bytes - 1.0) * 100.0;
         
         csv << engine.name() << ",Sign," << r.sign_us << "," << r.pk_bytes << "," << r.sig_bytes << ","

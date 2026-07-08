@@ -31,7 +31,6 @@ void StatisticalResult::compute(std::vector<double>& latencies_ns, uint64_t byte
     
     cv_percent = (mean_ns > 0) ? (stddev_ns / mean_ns) * 100.0 : 0.0;
     
-    StatisticalAnalyzer analyzer;
     
     p50_ns = StatisticalAnalyzer::percentile(latencies_ns, 50.0);
     p90_ns = StatisticalAnalyzer::percentile(latencies_ns, 90.0);

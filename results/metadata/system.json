@@ -1,0 +1,10 @@
+{
+  "cpu": "AMD EPYC 7763 64-Core Processor",
+  "kernel": "6.8.0-1052-azure",
+  "compiler": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "cmake": "cmake version 3.28.3",
+  "openssl": "OpenSSL 3.5.5 27 Jan 2026 (Library: OpenSSL 3.5.5 27 Jan 2026)",
+  "liboqs": "0.10.0 (fetched)",
+  "git_commit": "aa2c7cb0f18bf3a1c98e69227b45663eb46cca25",
+  "timestamp": "2026-07-08T12:51:46+00:00"
+}

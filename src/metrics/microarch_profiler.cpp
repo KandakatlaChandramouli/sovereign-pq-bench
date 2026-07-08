@@ -1,6 +1,8 @@
 #include "sovereign/metrics/microarch_profiler.hpp"
 #include <iostream>
 #include <stdexcept>
+#include <sstream>
+#include <iomanip>
 
 namespace sovereign {
 
@@ -99,4 +101,18 @@ MicroArchMetrics MicroArchProfiler::stop() {
     return m;
 }
 
+std::string MicroArchMetrics::to_csv_header() const {
+    return "cache_misses,cache_references,cache_miss_pct,branch_misses,branch_instructions,branch_miss_pct,instructions,cycles,ipc,context_switches,cpu_migrations,page_faults";
 }
+
+std::string MicroArchMetrics::to_csv_row() const {
+    char buf[512];
+    snprintf(buf, sizeof(buf), "%lu,%lu,%.2f,%lu,%lu,%.2f,%lu,%lu,%.4f,%lu,%lu,%lu",
+             cache_misses, cache_references, cache_miss_rate(),
+             branch_misses, branch_instructions, branch_miss_rate(),
+             instructions, cycles, ipc(),
+             context_switches, cpu_migrations, page_faults);
+    return std::string(buf);
+}
+
+} // namespace sovereign

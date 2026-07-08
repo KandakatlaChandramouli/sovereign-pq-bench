@@ -1,0 +1,25 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  SOVEREIGN PROTOCOL — Hardware-Aware PQC Evidence Engine         ║
+║  PMU Counters: Cache Misses, Branch Mispredictions, IPC           ║
+╚══════════════════════════════════════════════════════════════════╝
+
+System: AMD EPYC 7763 64-Core Processor | OpenSSL OpenSSL 3.0.13 30 Jan 2024
+
+Algorithm              Sign(µs)  Vfy(µs)CacheMiss%BranchMiss%     IPC    Key(B)    Sig(B)   MTU Pkts
+----------------------------------------------------------------------------------------------------------------
+ECDSA-P256                 847.9     225.7      0.0%       0.0%   0.000        91        71         1 pkt
+Ed25519                    119.5     193.4      0.0%       0.0%   0.000        32        64         1 pkt
+ML-DSA-44                  142.7      46.6      0.0%       0.0%   0.000      1312      2420         2 pkt
+ML-DSA-65                  189.5      55.4      0.0%       0.0%   0.000      1952      3309         3 pkt
+ML-DSA-87                  185.2     126.8      0.0%       0.0%   0.000      2592      4627         4 pkt
+Falcon-512                 292.3      44.2      0.0%       0.0%   0.000       897       656         1 pkt
+Falcon-1024                639.4      85.8      0.0%       0.0%   0.000      1793      1273         1 pkt
+
+[SPHINCS+ — running single iteration for HW counters...]
+SPHINCS+-128s           231922.4     291.8      0.0%       0.0%   0.000        32      7856         6 pkt
+SPHINCS+-256s           354367.3     666.3      0.0%       0.0%   0.000        64     29792        21 pkt
+
+╔══════════════════════════════════════════════════════════════════╗
+║  HARDWARE EVIDENCE EXPORTED — results/hardware_evidence_matrix.csv ║
+║  MTU Analysis: ECDSA=1 pkt, ML-DSA-44=2 pkts, SPHINCS+=20+ pkts  ║
+╚══════════════════════════════════════════════════════════════════╝
